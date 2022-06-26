@@ -426,7 +426,7 @@ async def tree_errors(
             ephemeral=True,
         )
     elif isinstance(error, app_commands.CommandInvokeError):
-        await interaction.followup.send_message(
+        await interaction.followup.send(
             "No code submission channel set. Please notify an admin to fix this.",
             ephemeral=True,
         )
