@@ -1,5 +1,6 @@
 from operator import truediv
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -32,7 +33,7 @@ options.add_argument("--headless")
 options.add_argument("--disable-dev-shm-usage")
 options.add_argument("--no-sandbox")
 driver = webdriver.Chrome(
-    executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options
+    service=Service(executable_path=os.environ.get("CHROMEDRIVER_PATH")), options=options
 )
 
 
