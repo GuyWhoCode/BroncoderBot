@@ -578,18 +578,18 @@ async def tree_errors(
             "You do not have the permission to execute this command!",
             ephemeral=True,
         )
-    # elif isinstance(error, app_commands.CommandInvokeError):
-    #     print("Am I getting here?")
-    #     error_message = "An error has occurred. Please contact an admin regarding what steps you took for this error message to occur."
-    #     if store.__getitem__("submission_channel_id") == 0:
-    #         error_message = (
-    #             "No code submission channel set. Please notify an admin to fix this."
-    #         )
+    elif isinstance(error, app_commands.CommandInvokeError):
+        print("Am I getting here?")
+        error_message = "An error has occurred. Please contact an admin regarding what steps you took for this error message to occur."
+        if store.__getitem__("submission_channel_id") == 0:
+            error_message = (
+                "No code submission channel set. Please notify an admin to fix this."
+            )
 
-    #     await interaction.followup.send(
-    #         content=error_message,
-    #         ephemeral=True,
-    #     )
+        await interaction.followup.send(
+            content=error_message,
+            ephemeral=True,
+        )
     else:
         print(
             "Ignoring exception in command {}:".format(interaction.command),
