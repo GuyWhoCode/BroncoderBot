@@ -47,7 +47,6 @@ def exit():
 
 async def setup(question):
     my_browser_state.state = SETTING_UP
-    driver.get("https://www.google.com/")
     driver.get("https://leetcode.com/accounts/login/?next=/profile/account/")
     try:
         element_present = EC.presence_of_element_located((By.ID, "signin_btn"))
@@ -71,7 +70,7 @@ async def setup(question):
     driver.find_element(By.ID, "signin_btn").click()
 
     try:
-        element_present = EC.presence_of_element_located((By.ID, "profile-app"))
+        element_present = EC.presence_of_element_located((By.ID, "base_content"))
         print("ATTEMPTING PROFILE")
         WebDriverWait(driver, timeout).until(element_present)
         print("PASSED PROFILE")
