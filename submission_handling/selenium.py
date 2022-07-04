@@ -47,53 +47,55 @@ def exit():
 
 async def setup(question):
     my_browser_state.state = SETTING_UP
-    driver.get("https://leetcode.com/accounts/login/?next=/profile/account/")
-    try:
-        element_present = EC.presence_of_element_located((By.ID, "signin_btn"))
-        WebDriverWait(driver, timeout).until(element_present)
-    except TimeoutException:
-        exit()
+    driver.get("https://www.google.com/")
+    print(driver.page_source)
+    # driver.get("https://leetcode.com/accounts/login/?next=/profile/account/")
+    # try:
+    #     element_present = EC.presence_of_element_located((By.ID, "signin_btn"))
+    #     WebDriverWait(driver, timeout).until(element_present)
+    # except TimeoutException:
+    #     exit()
 
-    driver.find_element(By.ID, "id_login").send_keys(LEETCODE_USERNAME)
-    driver.find_element(By.ID, "id_password").send_keys(LEETCODE_PASSWORD)
+    # driver.find_element(By.ID, "id_login").send_keys(LEETCODE_USERNAME)
+    # driver.find_element(By.ID, "id_password").send_keys(LEETCODE_PASSWORD)
 
-    try:
-        element_not_present = EC.invisibility_of_element((By.ID, "initial-loading"))
-        WebDriverWait(driver, timeout).until(element_not_present)
-    except TimeoutException:
-        exit()
+    # try:
+    #     element_not_present = EC.invisibility_of_element((By.ID, "initial-loading"))
+    #     WebDriverWait(driver, timeout).until(element_not_present)
+    # except TimeoutException:
+    #     exit()
 
-    driver.find_element(By.ID, "signin_btn").click()
+    # driver.find_element(By.ID, "signin_btn").click()
 
-    try:
-        element_present = EC.presence_of_element_located((By.ID, "profile-app"))
-        WebDriverWait(driver, timeout).until(element_present)
-    except TimeoutException:
-        exit()
+    # try:
+    #     element_present = EC.presence_of_element_located((By.ID, "profile-app"))
+    #     WebDriverWait(driver, timeout).until(element_present)
+    # except TimeoutException:
+    #     exit()
 
-    driver.get("https://leetcode.com/problems/{}".format(question["titleSlug"]))
+    # driver.get("https://leetcode.com/problems/{}".format(question["titleSlug"]))
 
-    try:
-        element_present = EC.invisibility_of_element((By.ID, "initial-loading"))
-        WebDriverWait(driver, timeout).until(element_present)
-    except TimeoutException:
-        exit()
+    # try:
+    #     element_present = EC.invisibility_of_element((By.ID, "initial-loading"))
+    #     WebDriverWait(driver, timeout).until(element_present)
+    # except TimeoutException:
+    #     exit()
 
-    try:
-        element_present = EC.presence_of_element_located(
-            (By.XPATH, '//*[contains(text(), "Got it!")]')
-        )
-        WebDriverWait(driver, 5).until(element_present)
-        driver.find_element(By.XPATH, '//*[contains(text(), "Got it!")]').click()
-    except TimeoutException:
-        pass
+    # try:
+    #     element_present = EC.presence_of_element_located(
+    #         (By.XPATH, '//*[contains(text(), "Got it!")]')
+    #     )
+    #     WebDriverWait(driver, 5).until(element_present)
+    #     driver.find_element(By.XPATH, '//*[contains(text(), "Got it!")]').click()
+    # except TimeoutException:
+    #     pass
 
-    driver.find_element(By.XPATH, "//*[@data-cy='lang-select']").click()
-    driver.find_element(By.XPATH, "//li[contains(text(), 'Python3')]").click()
-    tab_fix = """onkeydown=\"if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}\""""
-    driver.execute_script(
-        f'document.getElementsByClassName("btns__1OeZ")[0].innerHTML += `<textarea id="clipboard" {tab_fix} rows="4" cols="50">shit</textarea>`'
-    )
+    # driver.find_element(By.XPATH, "//*[@data-cy='lang-select']").click()
+    # driver.find_element(By.XPATH, "//li[contains(text(), 'Python3')]").click()
+    # tab_fix = """onkeydown=\"if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}\""""
+    # driver.execute_script(
+    #     f'document.getElementsByClassName("btns__1OeZ")[0].innerHTML += `<textarea id="clipboard" {tab_fix} rows="4" cols="50">shit</textarea>`'
+    # )
     my_browser_state.state = READY
 
 
