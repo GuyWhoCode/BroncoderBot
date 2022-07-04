@@ -69,13 +69,13 @@ async def setup(question):
 
     driver.find_element(By.ID, "signin_btn").click()
 
-    try:
-        element_present = EC.presence_of_element_located((By.ID, "base_content"))
-        print("ATTEMPTING PROFILE")
-        WebDriverWait(driver, timeout).until(element_present)
-        print("PASSED PROFILE")
-    except TimeoutException:
-        exit()
+    # try:
+    #     element_present = EC.presence_of_element_located((By.ID, "base_content"))
+    #     print("ATTEMPTING PROFILE")
+    #     WebDriverWait(driver, timeout).until(element_present)
+    #     print("PASSED PROFILE")
+    # except TimeoutException:
+    #     exit()
 
     driver.get("https://leetcode.com/problems/{}".format(question["titleSlug"]))
 
