@@ -180,7 +180,7 @@ greeting = [
 @tree.command(description="Say hello.")
 @app_commands.checks.cooldown(1, 1)
 async def hello(interaction: discord.Interaction):
-    if store.__getitem__("submission_channel_id") != 0: 
+    if store.__getitem__("submission_channel_id") == 0: 
         return await interaction.response.send_message(
             content="No code submission channel set. Please notify an admin to fix this.",
             ephemeral=True,
