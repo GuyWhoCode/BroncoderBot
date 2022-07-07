@@ -195,11 +195,11 @@ async def submitCode(code, language="Python3"):
 
     # print("done waiting")
 
-    try:
-        detail_present = EC.presence_of_element_located((By.CLASS_NAME, "detail__1Ye5"))
-        WebDriverWait(driver, timeout).until(detail_present)
-    except TimeoutException:
-        exit()
+    # try:
+    #     detail_present = EC.presence_of_element_located((By.CLASS_NAME, "detail__1Ye5"))
+    #     WebDriverWait(driver, timeout).until(detail_present)
+    # except TimeoutException:
+    #     exit()
 
     result_url = driver.find_element(By.CLASS_NAME, "detail__1Ye5").get_property("href")
 
