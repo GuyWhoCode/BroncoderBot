@@ -187,7 +187,8 @@ async def submitCode(code, language="Python3"):
         judging_present = EC.presence_of_element_located(
             (By.XPATH, "//*[contains(text(), 'Judging')]")
         )
-        WebDriverWait(driver, timeout).until(pending_present or judging_present)
+        # WebDriverWait(driver, timeout).until(pending_present or judging_present)
+        WebDriverWait(driver, timeout).until(pending_present)
     except TimeoutException:
         exit()
 
