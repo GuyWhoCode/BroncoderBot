@@ -51,9 +51,7 @@ async def setup(question):
     try:
         element_present = EC.presence_of_element_located((By.ID, "signin_btn"))
         WebDriverWait(driver, timeout).until(element_present)
-        print("I have signed in!")
     except TimeoutException:
-        print("UNABLE to sign in!!")
         exit()
 
     driver.find_element(By.ID, "id_login").send_keys(LEETCODE_USERNAME)
@@ -62,20 +60,10 @@ async def setup(question):
     try:
         element_not_present = EC.invisibility_of_element((By.ID, "initial-loading"))
         WebDriverWait(driver, timeout).until(element_not_present)
-        print("I have passed initial loading!")
     except TimeoutException:
-        print("FAILED initial loading!")
         exit()
 
     driver.find_element(By.ID, "signin_btn").click()
-
-    # try:
-    #     element_present = EC.presence_of_element_located((By.ID, "base_content"))
-    #     print("ATTEMPTING PROFILE")
-    #     WebDriverWait(driver, timeout).until(element_present)
-    #     print("PASSED PROFILE")
-    # except TimeoutException:
-    #     exit()
 
     driver.get("https://leetcode.com/problems/{}".format(question["titleSlug"]))
 
@@ -180,17 +168,23 @@ async def submitCode(code, language="Python3"):
 
     # driver.find_element(By.XPATH, '//button[@data-cy="submit-code-btn"]').click()
     driver.find_element(By.XPATH, '//*[@id="app"]/div/div[2]/div[1]/div/div[3]/div/div[3]/div[2]/div/button/span').click()
+    # Attempt at finding an alternate path to click the button by clicking the inner span within the button
+    
+    '''
+    BUG: Error seems to be around this region. My assumption is that the submit button is somehow not being clicked.
+    Commenting out the code segment below containing 'status_present' will throw a TimeoutException-related error saying that a timeout occurred in trying to find the element of 'detail_present'
+    Commenting out both code segments of 'status_present' and 'detail_present' will causes 'result_url' to throw an error of being unable to find the element in question.
+    '''
     try:
         status_present = EC.presence_of_element_located((By.CLASS_NAME, "status__1eAa"))
 
-        # WebDriverWait(driver, timeout).until(pending_present or judging_present)
         WebDriverWait(driver, timeout).until(status_present)
     except TimeoutException:
         exit()
 
     # await asyncio.sleep(5)
 
-    print("done waiting")
+    # print("done waiting")
 
     try:
         detail_present = EC.presence_of_element_located((By.CLASS_NAME, "detail__1Ye5"))
