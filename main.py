@@ -231,7 +231,6 @@ async def submit(
     ],
 ):
     await check_submission_channel()
-    await interaction.response.defer()
     submission = await handle_submission(interaction, attachment, language)
 
     response_message = f"Thanks for uploading, {interaction.user.display_name}! Received {language} file: {attachment.filename}."
@@ -323,14 +322,12 @@ async def mypoints(interaction: discord.Interaction):
 @tree.command(description="Compares you with the first place member.")
 async def first(interaction: discord.Interaction):
     await check_submission_channel()
-    await interaction.response.defer()
     await interaction.followup.send(get_first_stats(interaction))
 
 
 @tree.command(description="Display your personal stats.")
 async def get_stats(interaction: discord.Interaction):
     await check_submission_channel()
-    await interaction.response.defer()
 
     ParticipantData.get_instance().add_participant(interaction.user.id)
     participant_stats_embed = discord.Embed(
