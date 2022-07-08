@@ -178,24 +178,24 @@ async def submitCode(code, language="Python3"):
 
     await typeCode(code)
 
-    driver.find_element(By.XPATH, '//button[@data-cy="submit-code-btn"]').click()
-    try:
-        status_present = EC.presence_of_element_located((By.CLASS_NAME, "status__1eAa"))
+    # driver.find_element(By.XPATH, '//button[@data-cy="submit-code-btn"]').click()
+    # try:
+    #     status_present = EC.presence_of_element_located((By.CLASS_NAME, "status__1eAa"))
 
-        # WebDriverWait(driver, timeout).until(pending_present or judging_present)
-        WebDriverWait(driver, timeout).until(status_present)
-    except TimeoutException:
-        exit()
+    #     # WebDriverWait(driver, timeout).until(pending_present or judging_present)
+    #     WebDriverWait(driver, timeout).until(status_present)
+    # except TimeoutException:
+    #     exit()
 
     # await asyncio.sleep(5)
 
-    # print("done waiting")
+    print("done waiting")
 
-    # try:
-    #     detail_present = EC.presence_of_element_located((By.CLASS_NAME, "detail__1Ye5"))
-    #     WebDriverWait(driver, timeout).until(detail_present)
-    # except TimeoutException:
-    #     exit()
+    try:
+        detail_present = EC.presence_of_element_located((By.CLASS_NAME, "detail__1Ye5"))
+        WebDriverWait(driver, timeout).until(detail_present)
+    except TimeoutException:
+        exit()
 
     result_url = driver.find_element(By.CLASS_NAME, "detail__1Ye5").get_property("href")
 
