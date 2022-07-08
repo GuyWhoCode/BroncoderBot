@@ -180,15 +180,10 @@ async def submitCode(code, language="Python3"):
 
     driver.find_element(By.XPATH, '//button[@data-cy="submit-code-btn"]').click()
     try:
-        pending_present = EC.presence_of_element_located(
-            (By.XPATH, "//*[contains(text(), 'Pending')]")
-        )
+        status_present = EC.presence_of_element_located((By.CLASS_NAME, "status__1eAa"))
 
-        judging_present = EC.presence_of_element_located(
-            (By.XPATH, "//*[contains(text(), 'Judging')]")
-        )
         # WebDriverWait(driver, timeout).until(pending_present or judging_present)
-        WebDriverWait(driver, timeout).until(pending_present)
+        WebDriverWait(driver, timeout).until(status_present)
     except TimeoutException:
         exit()
 
